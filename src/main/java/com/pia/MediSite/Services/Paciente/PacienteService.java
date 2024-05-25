@@ -12,6 +12,6 @@ public interface PacienteService {
     Optional<Paciente> obtenerPacientePorId(Long id);
     List<Paciente> obtenerTodosPacientes();
     void eliminarPaciente(Long id);
-    Paciente obtenerPacientePorCorreoElectronico(String correoElectronico);
+    Optional<Paciente> obtenerPacientePorCorreoElectronico(String correoElectronico);
 
 }

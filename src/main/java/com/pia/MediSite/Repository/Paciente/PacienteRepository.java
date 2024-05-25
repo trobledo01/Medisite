@@ -14,9 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    Paciente findByCorreoElectronicoAndContrasena(String correoElectronico, String contraseña);
+public interface PacienteRepository extends JpaRepository<Paciente, Integer> {
+    Paciente findByCorreoElectronicoAndContrasena(String correoElectronico, String contrasena);
 
-        Paciente findByCorreoElectronico(String correoElectronico);
+        Optional<Paciente> findByCorreoElectronico(String correoElectronico);
 
 }

@@ -10,53 +10,39 @@ import java.util.Optional;
 
 @Service
 public class PacienteServiceImpl implements PacienteService {
-    private final PacienteRepository pacienteRepository;
-
-
 
     @Override
     public Paciente autenticarPaciente(String correoElectronico, String contraseña) {
-        return pacienteRepository.findByCorreoElectronicoAndContrasena(correoElectronico, contraseña);
-    }
-    @Override
-    public Paciente obtenerPacientePorCorreoElectronico(String correoElectronico) {
-        return pacienteRepository.findByCorreoElectronico(correoElectronico);
-    }
-
-    public PacienteServiceImpl(PacienteRepository pacienteRepository) {
-        this.pacienteRepository = pacienteRepository;
+        return null;
     }
 
     @Override
     public Paciente crearPaciente(Paciente paciente) {
-        return pacienteRepository.save(paciente);
+        return null;
     }
 
     @Override
     public Paciente actualizarPaciente(Long id, Paciente pacienteActualizado) {
-        Paciente pacienteExistente = pacienteRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Paciente no encontrado con el id: " + id));
-        pacienteExistente.setNombre(pacienteActualizado.getNombre());
-        pacienteExistente.setApellido(pacienteActualizado.getApellido());
-        pacienteExistente.setCorreoElectronico(pacienteActualizado.getCorreoElectronico());
-        pacienteExistente.setContraseña(pacienteActualizado.getContraseña());
-        return pacienteRepository.save(pacienteExistente);
+        return null;
     }
 
     @Override
     public Optional<Paciente> obtenerPacientePorId(Long id) {
-        return pacienteRepository.findById(id);
+        return Optional.empty();
     }
 
     @Override
     public List<Paciente> obtenerTodosPacientes() {
-        return pacienteRepository.findAll();
+        return List.of();
     }
 
     @Override
     public void eliminarPaciente(Long id) {
-        pacienteRepository.deleteById(id);
+
     }
 
-    // Otros métodos existentes...
+    @Override
+    public Optional<Paciente> obtenerPacientePorCorreoElectronico(String correoElectronico) {
+        return Optional.empty();
+    }
 }

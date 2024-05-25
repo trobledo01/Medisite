@@ -1,62 +1,68 @@
 package com.pia.MediSite.Entity.paciente;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.management.relation.Role;
+import java.util.Collection;
+import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Paciente")
-
-public class Paciente {
+public class Paciente implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Integer id;
     private String nombre;
+    private String apellido;
+    private String correoElectronico;
+    private String contrasena;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String getPassword() {
+        return contrasena;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getCorreoElectronico() {
+    @Override
+    public String getUsername() {
         return correoElectronico;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    private String apellido;
-    private String correoElectronico;
-    private String contraseña;
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
     // Constructores, getters y setters
 }
