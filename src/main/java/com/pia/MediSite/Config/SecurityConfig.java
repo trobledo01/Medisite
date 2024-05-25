@@ -33,6 +33,8 @@ public class SecurityConfig
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .requestMatchers("/swagger-ui/**")
+                .permitAll()
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()
                 .anyRequest()
